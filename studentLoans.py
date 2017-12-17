@@ -1,8 +1,6 @@
 import pandas as pd
 import datetime
 
-df = pd.DataFrame(columns=['Loan Name','Subsidized or Unsubsidized','Amount','Interest Rate','Start Date'])
-
 def addLoan(df):
     name = input("What is the name of the Loan: ")
     ifSub = input("Is the loan subsidized or unsubsidized: ")
@@ -14,20 +12,35 @@ def addLoan(df):
     date = datetime.date(year,month,day)
     loan = [{'Loan Name':name,'Subsidized or Unsubsidized':ifSub,'Amount':amount,'Interest Rate':interest,'Start Date':date}]
     newDF=pd.DataFrame(loan)
-    df = df.append(newDF)
+    df = pd.concat([df,newDF],ignore_index=True)
+    print(df)
+    
+def deleteLoan(df):
+    print(df)
+    index = int(input("Please enter the index of the loan you would like to remove: "))
+    df.drop(df.index(index))
 
-while True:
+df = pd.DataFrame(columns=['Loan Name','Subsidized or Unsubsidized','Amount','Interest Rate','Start Date'])
+
+run = True
+while run:
     print('''Enter a number to choose from the following options:
     1: Add A Loan
     2: Remove A Loan
     3: Log a made payment
     4: View Accumulated Interest
     5: Export to Text File
+    6: Print
+    7: Exit
     ''')
     choice = int(input())
 
     if choice == 1:
         addLoan(df)
-    elif choice ==2:
+    if choice == 2:
+        deleteLoan(df)
+    if choice ==6:
+        print(df)
+    if choice ==7:
+        run = False
 
-        
