@@ -13,14 +13,17 @@ def addLoan(df):
     loan = [{'Loan Name':name,'Subsidized or Unsubsidized':ifSub,'Amount':amount,'Interest Rate':interest,'Start Date':date}]
     newDF=pd.DataFrame(loan)
     df = pd.concat([df,newDF],ignore_index=True)
-    print(df)
+    return df
+
     
 def deleteLoan(df):
     print(df)
     index = int(input("Please enter the index of the loan you would like to remove: "))
     df.drop(df.index(index))
+    return df
 
-df = pd.DataFrame(columns=['Loan Name','Subsidized or Unsubsidized','Amount','Interest Rate','Start Date'])
+dataFrame = pd.DataFrame(columns=['Loan Name','Subsidized or Unsubsidized','Amount','Interest Rate','Start Date'])
+
 
 run = True
 while run:
@@ -36,11 +39,11 @@ while run:
     choice = int(input())
 
     if choice == 1:
-        addLoan(df)
+        dataFrame=addLoan(dataFrame)
     if choice == 2:
-        deleteLoan(df)
+        dataFrame=deleteLoan(dataFrame)
     if choice ==6:
-        print(df)
+        print(dataFrame)
     if choice ==7:
         run = False
 
