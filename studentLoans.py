@@ -22,6 +22,12 @@ def deleteLoan(df):
     df.drop(df.index(index))
     return df
 
+def madePayment(df):
+    print(df)
+    index = int(input("Please enter the amount of the payment  "))
+    ##To do how much was made towards principal and how much was made to interest
+
+
 dataFrame = pd.DataFrame(columns=['Loan Name','Subsidized or Unsubsidized','Amount','Interest Rate','Start Date'])
 
 
@@ -32,9 +38,10 @@ while run:
     2: Remove A Loan
     3: Log a made payment
     4: View Accumulated Interest
-    5: Export to Text File
-    6: Print
-    7: Exit
+    5: Export to Csv File
+    6. Import from Csv file 
+    7: Print
+    8: Exit
     ''')
     choice = int(input())
 
@@ -42,8 +49,14 @@ while run:
         dataFrame=addLoan(dataFrame)
     if choice == 2:
         dataFrame=deleteLoan(dataFrame)
-    if choice ==6:
-        print(dataFrame)
+    if choice ==3 or choice == 4:
+        print("Coming Soon")
+    if choice == 5:
+        dataFrame.to_csv('studentLoans.csv')
+    if choice == 6:
+        dataFrame = dataFrame.from_csv('studentLoans.csv')
     if choice ==7:
+        print(dataFrame)
+    if choice ==8:
         run = False
 
